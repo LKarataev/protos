@@ -1,0 +1,23 @@
+
+// Версия ProtoBuf
+syntax = "proto3";
+
+// Текущий пакет - указывает пространство имен для сервиса и сообщений. Помогает избегать конфликтов имен.
+package auth;
+
+// Настройки для генерации Go кода.
+option go_package = "karataev.auth.v1;authv1";
+
+service Auth {
+  rpc Validate (ValidateRequest) returns (ValidateResponse);
+}
+
+// Объект, который отправляется при вызове RPC-метода Validate.
+message ValidateRequest {
+  string jwt = 1; // Email of the user to register.
+}
+
+// Объект, который метод вернёт.
+message ValidateResponse {
+  string user_uuid = 1; // User UUID of the registered user.
+}
